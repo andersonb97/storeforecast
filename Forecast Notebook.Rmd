@@ -1,0 +1,129 @@
+---
+title: "XGBoost Store Sales Forecasting"
+author: "Benjamin Anderson"
+date: "November 23, 2020"
+output:
+html_document: default
+pdf_document: default
+---
+
+# Forecasting using XGBoost
+
+### Read in the necessary packages
+
+(Output hiden)
+
+```{r include=FALSE}
+library(readr)
+library(DataExplorer)
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(caret)
+library(xgboost)
+library(plyr) 
+library(tidyverse)
+library(data.table)
+library(Matrix)
+library(psych)
+library(gbm)
+```
+
+### Read in the datasets
+
+```{r}
+store.train <- read_csv('train.csv')
+store.test <- read_csv('test.csv')
+
+store <- bind_rows(store.train, 
+                   store.test, 
+                   .id = 'me') %>% 
+  select(-me)
+```
+
+### Pull out weekdays, months and year
+
+```{r}
+store$dayofweek <- store$date %>% weekdays()
+store$month <- store$date %>% month()
+store$year <- store$date %>% year()
+store <- store %>% select(-date)
+```
+
+### Split up the data
+
+```{r}
+store.train <- store %>% filter(!is.na(sales))
+store.test <- store %>% filter(is.na(sales))
+```
+
+### The data is clean and has no missing variables
+
+```{r}
+plot_missing(store.train)
+```
+
+## Predictions
+
+### Set up training parameters and tuning grid
+
+You may notice that the tuning grid is small, that is because I have already
+tuned the model quite a bit and these are the parameters that work the best.
+
+```{r}
+control <- trainControl(method='repeatedcv',
+                        number=3,
+                        repeats=2)
+
+grid_default <- expand.grid(nrounds = 250,
+                            max_depth = 10,
+                            eta = 0.3,
+                            gamma = 15:20,
+                            colsample_bytree = .5,
+                            min_child_weight = 25,
+                            subsample = 1:2)
+```
+
+### Begin the model training using the 'caret' package
+
+```{r echo = TRUE, results='hide'}
+# metric <- "Accuracy"
+# set.seed(123)
+# xgb_default <- train(sales ~ .,
+#                     data=store.train %>% select(-id),
+#                     method='xgbTree',
+#                     trControl=control,
+#                     tuneGrid = grid_default,
+#                     objective = "reg:squarederror")
+# 
+# # Save the gradient boosted model
+# saveRDS(xgb_default, 'xgb_default.RDS')
+
+# Read in the model if it has already run
+xgb_default <- readRDS('xgb_default.RDS')
+```
+
+### Information regarding the model
+
+```{r}
+names(xgb_default)
+plot(xgb_default)
+xgb_default$bestTune
+```
+
+### Make a prediction and write out the .csv file
+
+```{r}
+predictions <- data.frame(id=store.test$id, 
+                          sales = (predict(xgb_default, 
+                                                             newdata=store.test)))
+
+# write to a csv
+write.csv(predictions,
+          "submission.csv", 
+          row.names = FALSE)
+```
+
+The model is accurate and does relatively well compared to other models on 
+Kaggle with a SMAPE score of 14.3.
+

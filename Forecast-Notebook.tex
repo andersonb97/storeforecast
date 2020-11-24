@@ -1,0 +1,573 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={Untitled},
+            pdfauthor={Benjamin Anderson},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{Untitled}
+\author{Benjamin Anderson}
+\date{November 23, 2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{forecasting-using-xgboost}{%
+\section{Forecasting using XGBoost}\label{forecasting-using-xgboost}}
+
+\hypertarget{read-in-the-necessary-packages}{%
+\subsubsection{Read in the necessary
+packages}\label{read-in-the-necessary-packages}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'readr' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(DataExplorer)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'DataExplorer' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tidyverse' was built under R version 3.6.2
+\end{verbatim}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.2     v dplyr   1.0.2
+## v tibble  3.0.4     v stringr 1.4.0
+## v tidyr   1.1.2     v forcats 0.5.0
+## v purrr   0.3.4
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tibble' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'tidyr' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'purrr' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'forcats' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(lubridate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'lubridate' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'caret' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'caret'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     lift
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(xgboost)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'xgboost' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'xgboost'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     slice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plyr) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'plyr' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## ------------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+## You have loaded plyr after dplyr - this is likely to cause problems.
+## If you need functions from both plyr and dplyr, please load plyr first, then dplyr:
+## library(plyr); library(dplyr)
+\end{verbatim}
+
+\begin{verbatim}
+## ------------------------------------------------------------------------------
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'plyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     arrange, count, desc, failwith, id, mutate, rename, summarise,
+##     summarize
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     compact
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(data.table)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'data.table' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'data.table'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:lubridate':
+## 
+##     hour, isoweek, mday, minute, month, quarter, second, wday, week,
+##     yday, year
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     between, first, last
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     transpose
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(Matrix)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'Matrix'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(psych)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'psych' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'psych'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(gbm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'gbm' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loaded gbm 2.1.8
+\end{verbatim}
+
+\hypertarget{read-in-the-datasets}{%
+\subsubsection{Read in the datasets}\label{read-in-the-datasets}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{store.train <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{'train.csv'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   date = col_date(format = ""),
+##   store = col_double(),
+##   item = col_double(),
+##   sales = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{store.test <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{'test.csv'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   id = col_double(),
+##   date = col_date(format = ""),
+##   store = col_double(),
+##   item = col_double()
+## )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{store <-}\StringTok{ }\KeywordTok{bind_rows}\NormalTok{(store.train, }
+\NormalTok{                   store.test, }
+                   \DataTypeTok{.id =} \StringTok{'me'}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{me)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pull-out-weekdays-months-and-year}{%
+\subsubsection{Pull out weekdays, months and
+year}\label{pull-out-weekdays-months-and-year}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{store}\OperatorTok{$}\NormalTok{dayofweek <-}\StringTok{ }\NormalTok{store}\OperatorTok{$}\NormalTok{date }\OperatorTok{%>%}\StringTok{ }\KeywordTok{weekdays}\NormalTok{()}
+\NormalTok{store}\OperatorTok{$}\NormalTok{month <-}\StringTok{ }\NormalTok{store}\OperatorTok{$}\NormalTok{date }\OperatorTok{%>%}\StringTok{ }\KeywordTok{month}\NormalTok{()}
+\NormalTok{store}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\NormalTok{store}\OperatorTok{$}\NormalTok{date }\OperatorTok{%>%}\StringTok{ }\KeywordTok{year}\NormalTok{()}
+\NormalTok{store <-}\StringTok{ }\NormalTok{store }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{date)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{split-up-the-data}{%
+\subsubsection{Split up the data}\label{split-up-the-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{store.train <-}\StringTok{ }\NormalTok{store }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\OperatorTok{!}\KeywordTok{is.na}\NormalTok{(sales))}
+\NormalTok{store.test <-}\StringTok{ }\NormalTok{store }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(sales))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{the-data-is-clean-and-has-no-missing-variables}{%
+\subsubsection{The data is clean and has no missing
+variables}\label{the-data-is-clean-and-has-no-missing-variables}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot_missing}\NormalTok{(store.train)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Forecast-Notebook_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\hypertarget{predictions}{%
+\subsection{Predictions}\label{predictions}}
+
+\hypertarget{set-up-training-parameters-and-tuning-grid}{%
+\subsubsection{Set up training parameters and tuning
+grid}\label{set-up-training-parameters-and-tuning-grid}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{control <-}\StringTok{ }\KeywordTok{trainControl}\NormalTok{(}\DataTypeTok{method=}\StringTok{'repeatedcv'}\NormalTok{,}
+                        \DataTypeTok{number=}\DecValTok{3}\NormalTok{,}
+                        \DataTypeTok{repeats=}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{grid_default <-}\StringTok{ }\KeywordTok{expand.grid}\NormalTok{(}\DataTypeTok{nrounds =} \DecValTok{250}\NormalTok{,}
+                            \DataTypeTok{max_depth =} \DecValTok{10}\NormalTok{,}
+                            \DataTypeTok{eta =} \FloatTok{0.3}\NormalTok{,}
+                            \DataTypeTok{gamma =} \DecValTok{15}\OperatorTok{:}\DecValTok{20}\NormalTok{,}
+                            \DataTypeTok{colsample_bytree =} \FloatTok{.5}\NormalTok{,}
+                            \DataTypeTok{min_child_weight =} \DecValTok{25}\NormalTok{,}
+                            \DataTypeTok{subsample =} \DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{begin-the-model-training-using-the-caret-function}{%
+\subsubsection{Begin the model training using the `caret'
+function}\label{begin-the-model-training-using-the-caret-function}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# metric <- "Accuracy"}
+\CommentTok{# set.seed(123)}
+\CommentTok{# xgb_default <- train(sales ~ .,}
+\CommentTok{#                     data=store.train %>% select(-id),}
+\CommentTok{#                     method='xgbTree',}
+\CommentTok{#                     trControl=control,}
+\CommentTok{#                     tuneGrid = grid_default,}
+\CommentTok{#                     objective = "reg:squarederror")}
+\CommentTok{# }
+\CommentTok{# # Save the gradient boosted model}
+\CommentTok{# saveRDS(xgb_default, 'xgb_default.RDS')}
+
+\CommentTok{# Read in the model if it has already run}
+\NormalTok{xgb_default <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\StringTok{'xgb_default.RDS'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{information-regarding-the-model}{%
+\subsubsection{Information regarding the
+model}\label{information-regarding-the-model}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(xgb_default)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "method"       "modelInfo"    "modelType"    "results"      "pred"        
+##  [6] "bestTune"     "call"         "dots"         "metric"       "control"     
+## [11] "finalModel"   "preProcess"   "trainingData" "resample"     "resampledCM" 
+## [16] "perfNames"    "maximize"     "yLimits"      "times"        "levels"      
+## [21] "terms"        "coefnames"    "contrasts"    "xlevels"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(xgb_default)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Forecast-Notebook_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xgb_default}\OperatorTok{$}\NormalTok{bestTune}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   nrounds max_depth eta gamma colsample_bytree min_child_weight subsample
+## 5     250        10 0.3    17              0.5               25         1
+\end{verbatim}
+
+\hypertarget{make-a-prediction-and-write-out-the-.csv-file}{%
+\subsubsection{Make a prediction and write out the .csv
+file}\label{make-a-prediction-and-write-out-the-.csv-file}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{predictions <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{id=}\NormalTok{store.test}\OperatorTok{$}\NormalTok{id, }
+                          \DataTypeTok{sales =}\NormalTok{ (}\KeywordTok{predict}\NormalTok{(xgb_default, }
+                                                             \DataTypeTok{newdata=}\NormalTok{store.test)))}
+
+\CommentTok{# write to a csv}
+\KeywordTok{write.csv}\NormalTok{(predictions,}
+          \StringTok{"submission.csv"}\NormalTok{, }
+          \DataTypeTok{row.names =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The model is accurate and does relatively well compared to other models
+on Kaggle with a SMAPE score of 14.3.
+
+\end{document}
